@@ -10,9 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dev.gimboscloud.bradsbikes.models.MotorbikeAccessory;
-import dev.gimboscloud.bradsbikes.models.Product;
 import dev.gimboscloud.bradsbikes.services.AccessoryService;
-import dev.gimboscloud.bradsbikes.services.ProductService;
 
 public class AccessoryProcessorTest {
 	
