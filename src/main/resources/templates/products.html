@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Brad's Bikes</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body class="container">
+
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<main class="pt-3">
+		<h1>These are my Bikes:</h1>
+		<h3><em>Vroom Vroom</em></h3>
+		
+		
+		<table class="table">
+			<tbody>
+				<tr th:each="product: ${products}">
+					<td class="w-50"><img class="w-100" th:src="${'/images/bikes/' + product.id + '.jpg'}" alt="No images yet"></td>
+					<td>
+						<div class="card text-center">
+							<div class="card-body">
+								<h3 class="card-title" th:text="${product.name}">Name</h3>
+								<h5 class="card-text">
+									<u><span>$</span>			
+									<span th:text="${product.price}">$Price</span></u>
+								</h5>
+								<p class="card-text" th:text="${product.description}">Description</p>
+								<div th:if="${product instanceof T(dev.gimboscloud.bradsbikes.models.Motorbike)}">
+									<a th:href="${'/bikes/view/' + product.id}" class="w-25 btn btn-primary">View</a>
+								</div>
+								<div th:if="${product instanceof T(dev.gimboscloud.bradsbikes.models.MotorbikeAccessory)}">
+									<a th:href="${'/accessories/view/' + product.id}" class="w-25 btn btn-primary">View</a>
+								</div>
+							</div>
+							
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+</html>

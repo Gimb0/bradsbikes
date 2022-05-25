@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Brad's Bikes</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body class="container">
+
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<main class="pt-3">
+		<h1>This is your cart:</h1>
+		
+		<table class="table" th:if="${not productsMap.isEmpty()}">
+			<tbody>
+				<tr th:each="entry, stats : ${productsMap}" th:with="product=${entry.key}">
+					<td class="w-50"><img class="w-100" th:src="${'/images/bikes/' + product.getId() + '.jpg'}" alt="No images yet"></td>
+					<td>
+						<div class="card text-center">
+							<div class="card-body">
+								<h3 class="card-title" th:text="${product.name}">Name</h3>
+								<h5 class="card-text">
+									<u><span>$</span>			
+									<span th:text="${product.price}">$Price</span></u>
+								</h5>
+								<p class="card-text" th:text="${product.description}">Description</p>
+								<div th:if="${product instanceof T(dev.gimboscloud.bradsbikes.models.MotorbikeAccessory)}">
+									<p th:text="${'For: ' + product.getMotorbikes().get(0).getName()}"></p>
+								</div>
+								<p class="card-text" th:text="${'Quantity: ' + entry.value}">
+								<div th:if="${product instanceof T(dev.gimboscloud.bradsbikes.models.Motorbike)}">
+									<form method="POST" action="/bikes/buy/" th:object="${buyRequest}" class="form">
+										<input type="hidden" id="productID" name="productID" th:value="${product.id}">
+										<input type="hidden" id="quantity" name="quantity" value="0">
+										<button type="submit" class="btn btn-danger">Remove from Cart</button>
+									</form>
+								</div>
+								<div th:if="${product instanceof T(dev.gimboscloud.bradsbikes.models.MotorbikeAccessory)}">
+									<form method="POST" action="/accessories/buy/" th:object="${buyRequest}" class="form">
+										<input type="hidden" id="productID" name="productID" th:value="${product.id}">
+										<input type="hidden" id="quantity" name="quantity" value="0">
+										<button type="submit" class="btn btn-danger">Remove from Cart</button>
+									</form>
+								</div>
+							</div>
+							
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p th:if="${productsMap.isEmpty()}">You're cart is empty :(</p>
+	</main>
+</body>
+</html>

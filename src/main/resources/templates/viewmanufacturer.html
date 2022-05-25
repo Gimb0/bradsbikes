@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Brad's Bikes</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body class="container">
+
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<main class="pt-3">
+		<h1 th:text="${manufacturer.name + ' Products'}">Name</h1>
+		<table class="table">
+			<tbody>
+				<tr th:each="product : ${manufacturer.getProducts()}">
+					<td>
+						<h3 class="card-title" th:text="${product.name}">Name</h3>
+					</td>
+					<td>
+						<a th:href="${'/bikes/view/' + product.id}" class="btn btn-primary">View</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</main>
+</body>
+</html>

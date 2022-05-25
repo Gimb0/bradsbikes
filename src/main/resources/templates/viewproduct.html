@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Brad's Bikes</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body class="container">
+
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<main class="pt-3">
+		<div class="card text-center">
+			<div class="card-body">
+				<div class="mb-2">
+					<img class="w-75" th:src="${'/images/bikes/' + product.id + '.jpg'}">
+					<h1 class="card-title" th:text="${product.name + '   $' + product.price}">Name</h1>
+					<p class="card-text" th:text="${product.description}">Description</p>
+					<span th:text="${'Stock: ' + product.quantity}">Stock</span>
+				</div>
+				<div th:if="${product instanceof T(dev.gimboscloud.bradsbikes.models.Motorbike)}">
+				<form method="POST" action="/bikes/buy/" th:object="${buyRequest}" class="form">
+					<input type="hidden" th:field="${buyRequest.productID}">
+					<div class="form-group row">
+						<div class="col float-right">
+							<label class="float-right">Quantity:</label>
+						</div>
+						<div class="col">
+							<input th:field="${buyRequest.quantity}" type="number" class="w-25 form-control" min=0 th:max="${product.quantity}">
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Add to Cart</button>
+				</form>
+				</div>
+				<div th:if="${product instanceof T(dev.gimboscloud.bradsbikes.models.MotorbikeAccessory)}">
+					<form method="POST" action="/accessories/buy/" th:object="${buyRequest}" class="form">
+					<input type="hidden" th:field="${buyRequest.productID}">
+					<div class="row">
+					<div class="col"><label class="float-right">Bike: </label></div>
+					<div class="col">
+						<select class="w-50 form-control" id="motorbikeID" name="motorbikeID">
+							<option value="0">Select Motorcycle</option>
+							<option th:each="motorbike : ${product.getMotorbikes()}" th:value="${motorbike.getId()}" th:text="${motorbike.getName()}"></option>
+						</select>
+					</div>
+					</div>
+					<div class="form-group row">
+						<div class="col float-right">
+							<label class="float-right">Quantity:</label>
+						</div>
+						<div class="col">
+							<input th:field="${buyRequest.quantity}" type="number" class="w-25 form-control" min=0 th:max="${product.quantity}">
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Add to Cart</button>
+				</form>
+				</div>
+			</div>
+		</div>
+		
+	</main>
+</body>
+</html>

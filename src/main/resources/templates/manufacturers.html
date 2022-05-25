@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Manufacturers | Brad's Bikes</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body class="container">
+
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<main class="pt-3">
+		<h1>These are all the manufacturers</h1>
+		
+		
+		<table class="table">
+			<tbody>
+				<tr th:each="manufacturer: ${manufacturers}">
+					<td>
+						<h3 class="card-title" th:text="${manufacturer.name}">Name</h3>
+					</td>
+					<td>
+						<a th:href="${'/manufacturers/view/' + manufacturer.id}" class="w-25 btn btn-primary">View</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+</html>
