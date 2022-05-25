@@ -12,7 +12,5 @@ Brad's bikes is a shopping cart checkout website for buying super sport motorcyc
 ## View All Bikes
 ![image](https://user-images.githubusercontent.com/18228506/170250283-075c0bf4-c545-43c4-87a3-95c1ee7a4590.png)
 
-
 ## View Single Bike
-
-
+![image](https://user-images.githubusercontent.com/18228506/170250387-3c245e25-5ca6-4bea-86f3-52004c6928d0.png)
